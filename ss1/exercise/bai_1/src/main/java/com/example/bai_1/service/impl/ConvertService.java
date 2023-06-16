@@ -8,7 +8,7 @@ public class ConvertService implements IConvertService {
     @Override
     public int changeMoney(int money, int exchange) {
         if(money < 0){
-            return 0;
+            return -1;
         }
         return money*exchange;
     }

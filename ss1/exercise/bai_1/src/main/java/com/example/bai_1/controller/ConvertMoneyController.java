@@ -17,7 +17,12 @@ public class ConvertMoneyController {
 
     @PostMapping("/convert")
     public String calculator (@RequestParam("usd") int money, @RequestParam("exchangeRate") int exchange , Model model){
-        model.addAttribute("result", convertService.changeMoney(money,exchange));
+        int result = convertService.changeMoney(money,exchange);
+        if(result == -1){
+            model.addAttribute("error","Please input USD >= 0");
+        }else{
+            model.addAttribute("result", result);
+        }
         return "/calculator";
     }
     @GetMapping()

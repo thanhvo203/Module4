@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="calculator/convert">
+<form method="post" action="/calculator/convert">
     <table>
         <tr>
             <th>USD</th>
@@ -26,6 +26,7 @@
         </tr>
     </table>
 </form>
+${error}
 ${result}VNĐ
 </body>
 </html>

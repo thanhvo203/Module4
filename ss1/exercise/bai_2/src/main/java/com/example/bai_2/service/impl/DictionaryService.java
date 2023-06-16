@@ -15,7 +15,7 @@ public class DictionaryService implements IDictionaryService {
 
     @Override
     public String translate(String word) {
-        Map<String,String> map = dictionaryRepository.translate();
+        Map<String,String> map = dictionaryRepository.getMapTranslate();
         for (String englishWord: map.keySet()) {
             if(word.equals(englishWord.toLowerCase())){
                 word = map.get(englishWord);

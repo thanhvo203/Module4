@@ -7,5 +7,5 @@ import java.util.Map;
 
 @Repository
 public interface IDictionaryRepository {
-    Map<String,String> translate();
+    Map<String,String> getMapTranslate();
 }
