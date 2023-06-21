@@ -51,8 +51,11 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public Product getProductByID(int id) {
-        Product product = list.get(findById(id));
-        return product;
+        if (findById(id) >= 0) {
+            Product product = list.get(findById(id));
+            return product;
+        }
+        return null;
     }
 
     @Override
