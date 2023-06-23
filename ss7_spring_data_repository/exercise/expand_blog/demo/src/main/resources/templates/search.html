@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<select th:field="*{typeBlogs}" style="margin-left: 20px">
+    <option th:each="typeBlog , statTypeBlog : ${typeBlogs}"
+            th:text="${typeBlog.typeBlog}" th:value="${typeBlog.id}"
+            th:href="@{/blog/search/{id}(id=${typeBlog.getId()})}"></option>
+</select>
+<table>
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Title Blog</th>
+        <th>Content Blog</th>
+        <th>Author Blog</th>
+        <th>Type Blog</th>
+        <th>Date Write Blog</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog, blogStat: ${blogs}">
+        <td th:text="${blogStat.count}"></td>
+        <td th:text="${blog.getTitle()}"></td>
+        <td th:text="${blog.getContent()}"></td>
+        <td th:text="${blog.getAuthor()}"></td>
+        <td th:text="${blog.typeBlog.typeBlog}"></td>
+        <td th:text="${blog.getDate()}"></td>
+        <td><a th:href="@{/blog/delete/{id}(id=${blog.getId()})}">Delete</a></td>
+        <td><a th:href="@{/blog/edit/{id}(id=${blog.getId()})}">Edit</a></td>
+        <td><a th:href="@{/blog/detail/{id}(id=${blog.getId()})}">Detail</a></td>
+    </tr>
+    </tbody>
+</table>
+<div class="d-flex">
+    <a th:if="${blogs.hasPrevious()}"
+       th:href="@{/blog/(page=${blogs.number - 1})}">Previous</a>
+    <a th:if="${blogs.hasNext()}"
+       th:href="@{/blog/(page=${blogs.number + 1})}">Next</a>
+</div>
+
+</body>
+</html>
