@@ -20,5 +20,27 @@ public class TypeBlogServiceImpl implements ITypeBlogService {
     public List<TypeBlog> getListBlog() {
         return typeBlogRepository.findAll();
     }
+
+    @Override
+    public void createTypeBlog(TypeBlog typeBlog) {
+        typeBlogRepository.save(typeBlog);
+    }
+
+    @Override
+    public void deleteTypeBlog(int id) {
+       TypeBlog typeBlog = getTypeBlogByID(id);
+       typeBlog.setCheckStatus(true);
+       typeBlogRepository.save(typeBlog);
+    }
+
+    @Override
+    public void updateTypeBlog(TypeBlog typeBlog) {
+      typeBlogRepository.save(typeBlog);
+    }
+
+    @Override
+    public TypeBlog getTypeBlogByID(int id) {
+        return typeBlogRepository.findById(id).orElse(null);
+    }
 }
 

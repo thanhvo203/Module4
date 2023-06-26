@@ -7,4 +7,9 @@ import java.util.List;
 
 public interface ITypeBlogService {
     List<TypeBlog> getListBlog();
+    void createTypeBlog (TypeBlog typeBlog);
+    void deleteTypeBlog (int id);
+    void updateTypeBlog(TypeBlog typeBlog);
+
+    TypeBlog getTypeBlogByID(int id);
 }

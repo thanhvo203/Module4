@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/list-song/delete/${id}" th:object="${song}">
+    <table>
+        <tr>
+            <th>Blog Id</th>
+            <td><input th:field="*{id}" readonly></td>
+        </tr>
+        <tr>
+            <th>Title Blog</th>
+            <td><input type="text" th:field="*{nameSong}" readonly></td>
+        </tr>
+        <tr>
+            <th>Content Blog</th>
+            <td><input type="text" th:field="*{singer}" readonly></td>
+        </tr>
+        <tr>
+            <th>Author Blog</th>
+            <td><input type="text" th:field="*{typeSong}" readonly></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Remove"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

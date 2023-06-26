@@ -11,6 +11,7 @@ public class BLog {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int id;
     private String title;
+    @Column (columnDefinition = "LongText")
     private String content;
     private String author;
     private String date;

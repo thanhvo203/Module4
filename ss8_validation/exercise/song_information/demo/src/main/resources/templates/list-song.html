@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<a th:href="@{/list-song/create}">Create New Song</a>
+<div style="color: green" th:if="${message != null}" th:text="${message}"></div>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name Song</th>
+        <th>Singer</th>
+        <th>Type Song</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song, songStat: ${songs}">
+        <td th:text="${songStat.count}"></td>
+        <td th:text="${song.getNameSong()}"></td>
+        <td th:text="${song.getSinger()}"></td>
+        <td th:text="${song.getTypeSong()}"></td>
+        <td><a th:href="@{/list-song/delete/{id}(id=${song.getId()})}">Delete</a></td>
+        <td><a th:href="@{/list-song/edit/{id}(id=${song.getId()})}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+<div class="d-flex">
+    <a th:if="${songs.hasPrevious()}"
+       th:href="@{/list-song/(page=${songs.number - 1})}">Previous</a>
+    <a th:if="${songs.hasNext()}"
+       th:href="@{/list-song/(page=${songs.number + 1})}">Next</a>
+</div>
+
+</body>
+</html>
