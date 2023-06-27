@@ -14,6 +14,12 @@ public class SongService implements ISongService {
     @Autowired
     private ISongRepository iSongRepository;
 
+
+    @Override
+    public Page<Song> displaySong(Pageable pageable) {
+        return iSongRepository.findAllByCheckStatusIsFalse(pageable);
+    }
+
     @Override
     public void createSong(Song song) {
           iSongRepository.save(song);

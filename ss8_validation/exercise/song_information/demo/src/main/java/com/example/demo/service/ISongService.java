@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public interface ISongService {
 
+    Page<Song> displaySong(Pageable pageable);
+
     void createSong (Song song);
 
     void deleteSong(int id);

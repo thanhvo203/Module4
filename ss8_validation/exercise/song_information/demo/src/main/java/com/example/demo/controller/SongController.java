@@ -22,12 +22,10 @@ import javax.validation.Valid;
 public class SongController {
     @Autowired
     private SongService songService;
-    @Autowired
-    private ISongRepository songRepository;
 
     @GetMapping()
     public String showListSongs(@PageableDefault(size = 2) Pageable pageable, Model model) {
-        model.addAttribute("songs", songRepository.findAllByCheckStatusIsFalse(pageable));
+        model.addAttribute("songs", songService.displaySong(pageable));
         return "/list-song";
     }
 
