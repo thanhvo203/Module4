@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name Book</th>
+        <th>Date</th>
+        <th>Code Book</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order, orderStat: ${ordes}">
+        <td th:text="${orderStat.count}"></td>
+        <td th:text="${order.getNameBook()}"></td>
+        <td th:text="${order.getDateOrder()}"></td>
+        <td th:text="${order.getCode()}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="d-flex">
+    <a th:if="${ordes.hasPrevious()}"
+       th:href="@{/list-song/(page=${ordes.number - 1})}">Previous</a>
+    <a th:if="${ordes.hasNext()}"
+       th:href="@{/list-song/(page=${ordes.number + 1})}">Next</a>
+</div>
+
+</body>
+</html>

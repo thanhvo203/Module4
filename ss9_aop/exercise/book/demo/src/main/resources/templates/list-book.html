@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<a th:href="@{/book/create}">Create New Book</a>
+<div style="color: green" th:if="${message != null}" th:text="${message}"></div>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name Book</th>
+        <th>Quality</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, bookStat: ${books}">
+        <td th:text="${bookStat.count}"></td>
+        <td th:text="${book.getNameBook()}"></td>
+        <td th:text="${book.getCountBook()}"></td>
+        <td><a th:href="@{/book/delete/{id}(id=${book.getId()})}">Delete</a></td>
+        <td><a th:href="@{/book/edit/{id}(id=${book.getId()})}">Edit</a></td>
+        <td><a th:href="@{/book/borrow/{id}(id=${book.getId()})}">Borrow</a></td>
+    </tr>
+    </tbody>
+</table>
+<div class="d-flex">
+    <a th:if="${books.hasPrevious()}"
+       th:href="@{/book/(page=${books.number - 1})}">Previous</a>
+    <a th:if="${books.hasNext()}"
+       th:href="@{/book/(page=${books.number + 1})}">Next</a>
+</div>
+<a th:href="@{/book/return}">Return Book</a>
+</body>
+</html>

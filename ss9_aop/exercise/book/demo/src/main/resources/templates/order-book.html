@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/book/borrow/{id}" method="post" th:object="${book}">
+    <input type="hidden" th:field="*{id}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+            <th>Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input th:field="*{nameBook}" readonly></td>
+            <td><input th:field="*{countBook}" readonly></td>
+            <td><input name="code" th:value="${code}" readonly></td>
+            <td>
+                <button type="submit">Order</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>

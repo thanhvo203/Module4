@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/book/edit/{id}" th:object="${book}">
+    <input type="hidden" th:field="*{id}">
+    <table>
+        <tr>
+            <th>Name Book</th>
+            <td><input type="text" th:field="*{nameBook}"></td>
+        </tr>
+        <tr>
+            <th>Quality</th>
+            <td><input type="text" th:field="*{countBook}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" value="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

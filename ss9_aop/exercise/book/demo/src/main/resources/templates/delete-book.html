@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/book/delete/${id}" th:object="${book}">
+    <table>
+        <tr>
+            <th>Id Book</th>
+            <td><input th:field="*{id}" readonly></td>
+        </tr>
+        <tr>
+            <th>Name Book</th>
+            <td><input type="text" th:field="*{nameBook}" readonly></td>
+        </tr>
+        <tr>
+            <th>Count Book</th>
+            <td><input type="text" th:field="*{countBook}" readonly></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Remove"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
