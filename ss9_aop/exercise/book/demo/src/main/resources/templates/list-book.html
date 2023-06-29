@@ -22,7 +22,7 @@
         <td th:text="${book.getCountBook()}"></td>
         <td><a th:href="@{/book/delete/{id}(id=${book.getId()})}">Delete</a></td>
         <td><a th:href="@{/book/edit/{id}(id=${book.getId()})}">Edit</a></td>
-        <td><a th:href="@{/book/borrow/{id}(id=${book.getId()})}">Borrow</a></td>
+        <td><a th:href="@{/order/borrow/{id}(id=${book.getId()})}">Borrow</a></td>
     </tr>
     </tbody>
 </table>

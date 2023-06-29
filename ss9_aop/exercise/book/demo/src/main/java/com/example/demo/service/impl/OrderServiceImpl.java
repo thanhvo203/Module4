@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements IOrderService {
@@ -45,6 +46,11 @@ public class OrderServiceImpl implements IOrderService {
         order.setCode(code);
         order.setBooking(book);
         iOrderRepository.save(order);
+    }
+
+    @Override
+    public List<OrderBook> listOrder() {
+        return iOrderRepository.findAll();
     }
 
 }

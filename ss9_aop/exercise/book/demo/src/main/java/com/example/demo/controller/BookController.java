@@ -70,7 +70,7 @@ public class BookController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showFormEidt(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
+    public String showFormEdit(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
         if (bookService.findById(id) == null) {
             redirectAttributes.addFlashAttribute("message", "Not found id");
             return "redirect:/book";
@@ -82,44 +82,27 @@ public class BookController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editSong(@ModelAttribute Book book,
+    public String editBook(@ModelAttribute Book book,
                            RedirectAttributes redirectAttributes) {
         bookService.updateBook(book);
         redirectAttributes.addFlashAttribute("message", "Edit Book Success");
         return "redirect:/book";
     }
 
-     @GetMapping("/borrow/{id}")
-    public String showBorrowDetail(@PathVariable int id, Model model) {
-        Book book = bookService.findById(id);
-        model.addAttribute("book", book);
-        int code = (int) Math.floor((Math.random() + 1) * 10000);
-        while (orderService.existsAllByCode(code)) {
-            code = (int) Math.floor((Math.random() + 1) * 10000);
-        }
-        model.addAttribute("code", code);
-        return "order-book";
-    }
-    @PostMapping("/borrow/{id}")
-    public String borrowBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes, @RequestParam int id) {
-        if (book.getCountBook() > 0) {
-            orderService.addNewOrder(book, id);
-            book.setCountBook(book.getCountBook() - 1);
-            bookService.updateBook(book);
-            redirectAttributes.addFlashAttribute("message", "Borrow Successfully book");
-        } else {
-            redirectAttributes.addFlashAttribute("message", "This book doesn't exit");
-        }
-        return "redirect:/book";
-    }
     @GetMapping("/return")
-    String showFormGiveBackBook(){
+    String showFormGiveBackBook() {
         return "/return-book";
     }
+
     @PostMapping("/return")
     public String returnBook(@RequestParam("code") int code, RedirectAttributes redirectAttributes) {
-        bookService.giveBackBook(code);
-        redirectAttributes.addFlashAttribute("message","Give Back Success");
-        return "redirect:/book";
+        if (bookService.findById(code) != null) {
+            bookService.giveBackBook(code);
+            redirectAttributes.addFlashAttribute("message", "Give Back Success");
+            return "redirect:/book";
+        } else {
+            redirectAttributes.addFlashAttribute("message", "This code doesn't exit");
+            return "redirect:/book";
+        }
     }
 }
