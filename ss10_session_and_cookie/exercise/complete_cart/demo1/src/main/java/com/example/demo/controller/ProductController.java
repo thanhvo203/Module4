@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Cart;
 import com.example.demo.model.Product;
+import com.example.demo.service.IProductService;
 import com.example.demo.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @SessionAttributes("addedCart")
 public class ProductController {
     @Autowired
-    private ProductServiceImpl productService;
+    private IProductService productService;
 
     @GetMapping()
     public String showListProduct(Model model) {
@@ -26,10 +27,15 @@ public class ProductController {
         return new Cart();
     }
     @GetMapping("/detail/{id}")
-    public String detailProduct(@PathVariable("id") int id , Model model){
-        Product product = productService.findProductByID(id);
-        model.addAttribute("product",product);
-        return "/detail-product";
+    public String detailProduct(@PathVariable("id") int id , Model model, RedirectAttributes redirectAttributes){
+        if (productService.findProductByID(id) == null) {
+            redirectAttributes.addFlashAttribute("message", "This id doesn't exits");
+            return "redirect:/product";
+        }else {
+            Product product = productService.findProductByID(id);
+            model.addAttribute("product", product);
+            return "/detail-product";
+        }
     }
     @GetMapping("/cart/{id}")
     public String addToCart(@PathVariable("id") int id, @ModelAttribute("addedCart") Cart cart, RedirectAttributes redirectAttributes){

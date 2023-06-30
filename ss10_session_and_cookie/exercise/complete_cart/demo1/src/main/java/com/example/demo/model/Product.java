@@ -12,6 +12,7 @@ public class Product {
 
     private double priceProduct;
 
+    @Column( columnDefinition = "LongText")
     private String description;
 
     private boolean checkStatus;

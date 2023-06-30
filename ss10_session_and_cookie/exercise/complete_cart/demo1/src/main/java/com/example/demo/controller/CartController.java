@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Cart;
+import com.example.demo.service.IProductService;
 import com.example.demo.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CartController {
     @Autowired
-    private ProductServiceImpl productService;
+    private IProductService productService;
 
     @GetMapping("change/{id}")
     public String changeQuality(@PathVariable("id") int id, @SessionAttribute("addedCart") Cart cart,
-                                @RequestParam("action") String action) {
-        if (action.equals("addition")) {
-            cart.addProduct(productService.findProductByID(id));
-        } else {
-            cart.subtractProduct(productService.findProductByID(id));
+                                @RequestParam("action") String action,RedirectAttributes redirectAttributes) {
+        if (productService.findProductByID(id) == null){
+            redirectAttributes.addFlashAttribute("message","This id doesn't exits");
+            return "redirect:/product/your-cart";
+        }else{
+            if (action.equals("addition")) {
+                cart.addProduct(productService.findProductByID(id));
+            } else {
+                cart.subtractProduct(productService.findProductByID(id));
+            }
         }
         return "redirect:/product/your-cart";
     }
@@ -28,7 +34,7 @@ public class CartController {
     public String deleteCart(@PathVariable("id") int id, @SessionAttribute("addedCart") Cart cart,
                              @RequestParam("action") String action, RedirectAttributes redirectAttributes) {
         if (action.equals("delete") && productService.findProductByID(id) == null) {
-            redirectAttributes.addFlashAttribute("message", "This id doesn't exit");
+            redirectAttributes.addFlashAttribute("message", "This id doesn't exits");
             return "redirect:/product/your-cart";
         }
         cart.deleteCart(productService.findProductByID(id));
